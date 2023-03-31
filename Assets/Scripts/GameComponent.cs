@@ -9,6 +9,8 @@ public abstract class GameComponent : MonoBehaviour
     private Vector3 _position;
 
     protected abstract void BallCollision();
+
+    public static Vector3 GetRandomPosition() => Random.onUnitSphere * SpawnRadius;
     private void Awake()
     {
         _animator = gameObject.transform.GetChild(0).GetComponent<Animator>();
@@ -22,7 +24,7 @@ public abstract class GameComponent : MonoBehaviour
         else
         {
             do
-                _position = Random.onUnitSphere * SpawnRadius;
+                _position = GetRandomPosition();
             while (_position.Equals(ReservedPosition));
 
             gameObject.transform.position = _position;
